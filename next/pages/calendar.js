@@ -4,6 +4,7 @@ import dayGridPlugin from '@fullcalendar/daygrid'
 import interactionPlugin from '@fullcalendar/interaction'
 import resourceTimelinePlugin from '@fullcalendar/resource-timeline'
 import timeGridPlugin from '@fullcalendar/timegrid'
+import rrulePlugin from '@fullcalendar/rrule'
 
 export default function CalendarPage() {
   return (
@@ -14,7 +15,8 @@ export default function CalendarPage() {
             resourceTimelinePlugin,
             dayGridPlugin,
             interactionPlugin,
-            timeGridPlugin
+            timeGridPlugin,
+            rrulePlugin
           ]}
           headerToolbar={{
             left: 'prev,next today',
@@ -26,13 +28,31 @@ export default function CalendarPage() {
           editable={true}
           selectable={true}
           selectMirror={true}
-          resources={[
-            { id: 'a', title: 'Auditorium A' },
-            { id: 'b', title: 'Auditorium B', eventColor: 'green' },
-            { id: 'c', title: 'Auditorium C', eventColor: 'orange' },
-          ]}
           initialEvents={[
-            { title: 'nice event', start: new Date(), resourceId: 'a' }
+            
+          ]}
+          events={[
+            {
+              title: 'my recurring event',
+              rrule: {
+                freq: 'daily',
+                byweekday:[0,1,2,3,4],
+                dtstart: '2024-04-25T08:00:00',
+              },
+              duration: "02:00",
+              exdate:['2024-05-22T08:00:00']
+              
+            },
+            {
+              title: ' cutom event',
+              rrule: {
+                freq: 'daily',
+                dtstart: '2024-05-22T08:00:00',
+                until: '2024-05-22T10:00:00',
+                
+              },
+              duration:'02:00'
+            }
           ]}
         />
       </div>
